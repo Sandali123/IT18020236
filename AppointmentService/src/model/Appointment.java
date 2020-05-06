@@ -35,23 +35,20 @@ public class Appointment {
 
 			String insert = " insert into appointment (`app_Date`,`app_Venue`,`app_Doctor_Id`,`app_Patient_Id`) values (?,?,?,?)";
 			PreparedStatement preparedStatement = con.prepareStatement(insert);
-			
+
 			preparedStatement.setString(1, date);
 			preparedStatement.setString(2, venue);
 			preparedStatement.setString(3, docName);
 			preparedStatement.setString(4, patientId);
 
 			preparedStatement.execute();
-			con.close();
-			output = "Inserted successfully";
-			
 
-			String newItems = readAppoinment();
-			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
+			String newAppointment = readAppoinment();
+			output = "{\"status\":\"success\", \"data\": \"" + newAppointment + "\"}";
 
 		} catch (Exception e) {
-			
-			output = "Error while inserting the Appoinment.";
+
+			output = "{\"status\":\"error\", \"data\": \"Error while creating appointment.\"}";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -77,14 +74,13 @@ public class Appointment {
 				String docId = Integer.toString(rs.getInt("app_Doctor_Id"));
 				String patientId = Integer.toString(rs.getInt("app_Patient_Id"));
 
-				output += "<tr><td><input id='hidUpdate' name='hidUpdate' type='hidden' value='"
-						+ appId + "'>" + appId + "</td>";
+				output += "<tr><td><input id='hidUpdate' name='hidUpdate' type='hidden' value='" + appId + "'>" + appId
+						+ "</td>";
 				output += "<td>" + docId + "</td>";
 				output += "<td>" + patientId + "</td>";
 				output += "<td>" + appDate + "</td>";
 				output += "<td>" + appVenue + "</td>";
 
-				
 				output += "<td><input name='btnUpdate' type='button'value='Update' class='btnUpdate btn btn-secondary'>"
 						+ "<input name='btnRemove' type='button' value='Delete' class='btnRemove btn btn-danger' data-appointmentid='"
 						+ appId + "'>" + "</td></tr>";
@@ -97,35 +93,36 @@ public class Appointment {
 		return output;
 	}
 
-	
-	  public String updateAppoinment(String appId, String date, String venue,
-	  String docName, String patientId) 
-	  { 
-		  String output = ""; try { Connection con = connect(); 
-		  if (con == null) 
-		  { 
-			  return "Error while connecting to the database for updating patient details."; }
-	  String update = "UPDATE appointment SET app_Date=?, app_Venue=?, app_Doctor_Id=?, app_Patient_Id=? WHERE app_Id=?"; 
-	  PreparedStatement preparedStatement = con.prepareStatement(update);
-	  
-	  preparedStatement.setString(1, date); 
-	  preparedStatement.setString(2, venue);
-	  preparedStatement.setString(3, docName); 
-	  preparedStatement.setString(4, patientId); 
-	  preparedStatement.setInt(5, Integer.parseInt(appId));
-	  
-	  preparedStatement.execute();
-	  
-	  output = "Updated successfully"; 
-	  String newItems = readAppoinment(); 
-	  output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}"; } 
-		  catch
-	  (Exception e) 
-		  { output = "Error while updating the Appoinment";
-	  System.err.println(e.getMessage()); 
-	  } 
-		  return output; }
-	 
+	public String updateAppoinment(String appId, String date, String venue, String docName, String patientId) {
+		String output = "";
+		try {
+			Connection con = connect();
+			if (con == null) {
+				return "Error while connecting to the database for updating patient details.";
+			}
+			String update = "UPDATE appointment SET app_Date=?, app_Venue=?, app_Doctor_Id=?, app_Patient_Id=? WHERE app_Id=?";
+			PreparedStatement preparedStatement = con.prepareStatement(update);
+
+			preparedStatement.setString(1, date);
+			preparedStatement.setString(2, venue);
+			preparedStatement.setString(3, docName);
+			preparedStatement.setString(4, patientId);
+			preparedStatement.setInt(5, Integer.parseInt(appId));
+
+			preparedStatement.execute();
+
+			// There is a Error when updating an appointment. Use only date when updating
+			// otherwise it prints the "Data truncation" error in
+			// the console (yyyy/mm//dd) format
+
+			String newAppointment = readAppoinment();
+			output = "{\"status\":\"success\", \"data\": \"" + newAppointment + "\"}";
+		} catch (Exception e) {
+			output = "Error while updating the Appoinment";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
 
 	public String deleteAppoinment(String appId) {
 		String output = "";
@@ -142,11 +139,9 @@ public class Appointment {
 			preparedStatement.execute();
 			output = "Deleted successfully";
 
-			String newItems = readAppoinment();
-			output = "{\"status\":\"success\", \"data\": \"" + newItems + "\"}";
-			
-			
-			
+			String newAppointment = readAppoinment();
+			output = "{\"status\":\"success\", \"data\": \"" + newAppointment + "\"}";
+
 		} catch (Exception e) {
 			output = "Error while deleting the appoinment";
 			System.err.println(e.getMessage());

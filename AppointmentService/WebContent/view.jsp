@@ -11,15 +11,15 @@
 <script src="Components/appointment.js"></script>
 <style type="text/css">
 body {
-color:white;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+	color: white;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
 		url(view.jpg);
-		margin: 0;
-    padding: 0;
-    background-size: cover;
-    background-position: center;
-    font-family: sans-serif;
-	height:100vh;
+	margin: 0;
+	padding: 0;
+	background-size: cover;
+	background-position: center;
+	font-family: sans-serif;
+	height: 100vh;
 }
 </style>
 </head>
@@ -30,18 +30,18 @@ color:white;
 				<h1>Appointment Management</h1>
 				<br>
 				<form id="formAppointment" name="formAppointment">
-					Assign Doctor <input id="assignDoctor" name="assignDoctor"
+					Assign Doctor Id<input id="assignDoctor" name="assignDoctor"
 						type="text" class="form-control form-control-sm"> <br>
-					Assign Patient <input id="assignPatient" name="assignPatient"
+					Assign Patient Id<input id="assignPatient" name="assignPatient"
 						type="text" class="form-control form-control-sm"> <br>
 					Appointment Date <input id="appointmentDate" name="appointmentDate"
 						type="text" class="form-control form-control-sm"> <br>
 					Appointment Venue <input id="appointmentVenue"
 						name="appointmentVenue" type="text"
-						class="form-control form-control-sm"> <br> 
-						
-						<br> <input id="btnSave" name="btnSave" type="button" value="Update Appointment" class="btn btn-primary">
-					 <input type="hidden" id="hid" name="hid" value="">
+						class="form-control form-control-sm"> <br> <br>
+					<input id="btnSave" name="btnSave" type="button"
+						value="Update Appointment" class="btn btn-primary"> <input
+						type="hidden" id="hid" name="hid" value="">
 				</form>
 				<br>
 			</div>

@@ -11,15 +11,15 @@
 <script src="Components/appointment.js"></script>
 <style>
 body {
-color:white;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+	color: white;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
 		url(back.jpg);
-		margin: 0;
-    padding: 0;
-    background-size: cover;
-    background-position: center;
-    font-family: sans-serif;
-	height:100vh;
+	margin: 0;
+	padding: 0;
+	background-size: cover;
+	background-position: center;
+	font-family: sans-serif;
+	height: 100vh;
 }
 </style>
 </head>
@@ -29,23 +29,23 @@ color:white;
 			<div class="col-6">
 				<h1>Appointment Management</h1>
 				<br>
-				<form id="formAppointment" name="formAppointment"
-				action="view.jsp">
-					Assign Doctor <input id="assignDoctor" name="assignDoctor"
+				<form id="formAppointment" name="formAppointment" action="view.jsp">
+					Assign Doctor Id <input id="assignDoctor" name="assignDoctor"
 						type="text" class="form-control form-control-sm"> <br>
-					Assign Patient <input id="assignPatient" name="assignPatient"
+					Assign Patient Id <input id="assignPatient" name="assignPatient"
 						type="text" class="form-control form-control-sm"> <br>
 					Appointment Date <input id="appointmentDate" name="appointmentDate"
-						type="text" class="form-control form-control-sm"> <br>
-					Appointment Venue <input id="appointmentVenue"
+						type="datetime-local" class="form-control form-control-sm">
+					<br> Appointment Venue <input id="appointmentVenue"
 						name="appointmentVenue" type="text"
-						class="form-control form-control-sm"> <br> 
-						
-						<br> <input id="btnSave" name="btnSave" type="button" value="Insert Appointment" class="btn btn-primary">
-					 <input type="hidden" id="hid" name="hid" value="">
-					 <input type = "submit" value="View Appointment" class="btn btn-primary">
+						class="form-control form-control-sm"> <br> <br>
+					<input id="btnSave" name="btnSave" type="button"
+						value="Insert Appointment" class="btn btn-primary"> <input
+						type="hidden" id="hid" name="hid" value=""> <input
+						type="submit" value="View Appointment" class="btn btn-primary">
 				</form>
 				<div id="alertSuccess" class="alert alert-success"></div>
+
 				<div id="alertError" class="alert alert-danger"></div>
 				<br>
 			</div>
@@ -53,3 +53,6 @@ color:white;
 	</div>
 </body>
 </html>
+
+<!-- There is a Error when updating an appointment. Use only date when updating otherwise it prints the "Data truncation" error in -->
+<!-- the console (yyyy/mm//dd) format -->

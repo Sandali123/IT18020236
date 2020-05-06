@@ -1,6 +1,7 @@
 package model;
 
-import java.io.IOException;import java.sql.PreparedStatement;
+import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -65,20 +66,20 @@ public class AppointmentsAPI extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
 	 */
-		  protected void doPut(HttpServletRequest request, HttpServletResponse
-		  response) throws ServletException, IOException { Map paras =
-		  getParasMap(request);
-		  
-		  String output =
-		  appointmentObj.updateAppoinment(
-				  paras.get("hid").toString(),
-		paras.get("appointmentDate").toString(),
-		  paras.get("appointmentVenue").toString(),
-		  paras.get("assignDoctor").toString(), paras.get("assignPatient").toString()
-		 );
-		  
-		  response.getWriter().write(output); }
-		 
+	protected void doPut(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Map paras = getParasMap(request);
+
+		String output = appointmentObj.updateAppoinment(paras.get("hid").toString(),
+				paras.get("appointmentDate").toString(), paras.get("appointmentVenue").toString(),
+				paras.get("assignDoctor").toString(), paras.get("assignPatient").toString());
+
+		// There is a Error when updating an appointment. Use only date when updating
+		// otherwise it prints the "Data truncation" error in
+		// the console (yyyy/mm//dd) format
+
+		response.getWriter().write(output);
+	}
 
 	private static Map getParasMap(HttpServletRequest request) {
 		Map<String, String> map = new HashMap<String, String>();
