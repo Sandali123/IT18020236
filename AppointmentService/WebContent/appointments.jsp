@@ -18,8 +18,8 @@ body {
 	padding: 0;
 	background-size: cover;
 	background-position: center;
-	font-family: sans-serif;
 	height: 100vh;
+	font-family: sans-serif;
 }
 </style>
 </head>
