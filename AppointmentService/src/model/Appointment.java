@@ -60,7 +60,7 @@ public class Appointment {
 			Connection con = connect();
 			if (con == null) {
 				return "Error while connecting to the database for reading appoinment details.";
-			}
+			}else {
 			output = "<table border=\"1\" width=\"100%\"><tr><th>Appointment Id</th><th>Doctor Assign</th><th>Patient Id</th>"
 					+ "<th>Appointment Date</th><th>Appointment Venue</th><th colspan=\"2\">Actions</th>";
 			String query = "select * from appointment";
@@ -86,6 +86,7 @@ public class Appointment {
 						+ appId + "'>" + "</td></tr>";
 			}
 			output += "</table>";
+			}
 		} catch (Exception e) {
 			output = "Error while reading the Appoinment.";
 			System.err.println(e.getMessage());
